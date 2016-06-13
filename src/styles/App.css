@@ -1,21 +1,28 @@
 /* Base Application Styles */
-body {
-  color: #fff;
-  background: #222;
+.search-bar {
+    margin: 20px;
+    text-align: center;
 }
 
-.index img {
-  margin: 40px auto;
-  border-radius: 4px;
-  background: #fff;
-  display: block;
+.search-bar input {
+    width: 75%;
 }
 
-.index .notice {
-  margin: 20px auto;
-  padding: 15px 0;
-  text-align: center;
-  border: 1px solid #000;
-  border-width: 1px 0;
-  background: #666;
+.video-item img {
+    max-width: 64px;
+}
+
+.video-detail .details {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+}
+
+.list-group-item {
+    cursor: pointer;
+}
+
+.list-group-item:hover {
+    background-color: #eeeeee;
 }

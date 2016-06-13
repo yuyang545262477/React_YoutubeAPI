@@ -1,22 +1,56 @@
 require('normalize.css/normalize.css');
 require('styles/App.css');
 
-import React from 'react';
+import React from "react";
+import _ from "lodash";
+import YTSearch from "youtube-api-search";
+import SearchBar from "./SearchBarComponent";
+import VideoList from "./VideoListComponent";
+import VideoDetail from "./VideoDetailComponent";
 
-let yeomanImage = require('../images/yeoman.png');
+
+const API_KEY = 'AIzaSyCeSTU83QiKTMKKAR8aPg5jVfDWGGNGwpM';
 
 class AppComponent extends React.Component {
-  render() {
-    return (
-      <div className="index">
-        <img src={yeomanImage} alt="Yeoman Generator" />
-        <div className="notice">Please edit <code>src/components/Main.js</code> to get started!</div>
-      </div>
-    );
-  }
+    constructor(props) {
+        super(props);
+        
+        this.state = {
+            videos: [],
+            selectedVideo: null
+        };
+        
+        this.videoSearch('react');
+    }
+    
+    videoSearch(term) {
+        YTSearch({key: API_KEY, term: term}, (videos)=> {
+            this.setState({
+                videos: videos,
+                selectedVideo: videos[0]
+            });
+        });
+    }
+    
+    render() {
+        const videoSearch = _.debounce((term)=> {
+            this.videoSearch(term)
+        }, 400);
+        
+        return (
+            <div>
+                <SearchBar onSearchTermChange={videoSearch}/>
+                <VideoDetail video={this.state.selectedVideo}/>
+                <VideoList
+                    onVideoSelect={(selectedVideo)=> this.setState({selectedVideo})}
+                    videos={this.state.videos}
+                />
+            </div>
+        
+        );
+    }
 }
 
-AppComponent.defaultProps = {
-};
+AppComponent.defaultProps = {};
 
 export default AppComponent;
