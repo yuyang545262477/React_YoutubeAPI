@@ -1,5 +1,7 @@
 require('normalize.css/normalize.css');
 require('styles/App.css');
+require('bootstrap/dist/css/bootstrap.css');
+
 
 import React from "react";
 import _ from "lodash";
@@ -20,7 +22,7 @@ class AppComponent extends React.Component {
             selectedVideo: null
         };
         
-        this.videoSearch('react');
+        this.videoSearch('angular');
     }
     
     videoSearch(term) {
